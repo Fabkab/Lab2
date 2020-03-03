@@ -1,0 +1,273 @@
+<html>
+<head>
+	<title>Lab2</title>
+	<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="jquery.fulltable.js"></script>
+	<link rel="stylesheet" href="index.css"/>
+
+	<style type="text/css">
+		table {
+			position:relative;
+			width:relative;
+			margin:4px 0;
+			border-collapse: collapse;
+			font-family: tahoma, arial, helvetica !important;
+			font-size: 9pt !important;
+		}
+		table, table th, table td {
+			border: 1px solid black;
+		}
+		table th, table td  {
+			padding:0 2em;
+			white-space:nowrap;
+			text-overflow:initial;
+			overflow:scroll;
+			line-height:22px;
+			height:22px;
+		}
+		a.button {
+			position: relative;
+			display: inline-block;
+
+			font-family: tahoma, arial, helvetica;
+			font-size: 9pt;
+			font-weight: bold;
+
+			color: #ffffff;
+			background-color: #AAAAAA;
+
+			padding: 5px;
+
+			text-decoration: none;
+
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			border-radius: 5px;
+		}
+	</style>
+
+	<script type="text/javascript">
+		$(
+			function() {
+				$("#test-table").FullTable({
+					"alwaysCreating":true,
+					"selectable":true,
+					"fields": {
+
+           "common_names": {
+                "type":"string",
+                "placeholder":"Mandatory",
+                "mandatory":true,
+				"validator": function(common_names) {
+				var matches = common_names.match(/\d+/g);
+				var format = /[!@#$%^&*()+=\[\]{};':"\\|,<>\/?]+/;
+				if (matches != null || format.test(common_names)) {
+  				  alert("No numbers or special characters allowed in the name.\nPlease try another name using alphabetical letters!");
+				}
+				else {
+					return true;
+				}
+			},
+                "errors": {
+                "type":"common names must be a string",
+                "mandatory": "Common name is field is mandatory"
+                }
+           },
+           "alternate_names": {
+ 				"type": "text",
+                "placeholder":"optional",
+                "mandatory":false,
+                "validator": function(alternate_names) {
+				var matches = alternate_names.match(/\d+/g);
+				var format = /[!@#$%^&*()+=\[\]{};':"\\|,<>\/?]+/;
+				if (matches != null || format.test(alternate_names)) {
+  				  alert("No numbers or special characters allowed in the name.\nPlease try another name using alphabetical letters!");
+				}
+				else {
+					return true;
+				}
+			},
+			"errors": {
+                "type":"alternate names must be a string"
+                }
+           },
+           "target_sector": {
+                "type": "string",
+                "placeholder":"optional",
+                "mandatory":false,
+                "validator": function(target_sector) {
+				var matches = target_sector.match(/\d+/g);
+				var format = /[!@#$%^&*()+=\[\]{};':"\\|,<>\/?]+/;
+				if (matches != null || format.test(target_sector)) {
+  				  alert("No numbers or special characters allowed in the name.\nPlease try again using alphabetical letters!");
+				}
+				else {
+					return true;
+				}
+			},
+			"errors": {
+                "type":"target sector must be a string"
+                }
+           },
+           "attack_vector": {
+                "type": "string",
+                "placeholder":"optional",
+                "mandatory":false,
+                "validator": function(attack_vector) {
+				var matches = attack_vector.match(/\d+/g);
+				var format = /[!@#$%^&*()+=\[\]{};':"\\|,<>\/?]+/;
+				if (matches != null || format.test(attack_vector)) {
+  				  alert("No numbers or special characters allowed in the name.\nPlease try again using alphabetical letters!");
+				}
+				else {
+					return true;
+				}
+			},
+                "errors": {
+                "type":"attack vector must be a string"
+                }
+           },
+           "associated_malware": {
+                "type": "string",
+                "placeholder":"optional",
+                "mandatory":false,
+               "validator": function(associated_malware) {
+				var matches = associated_malware.match(/\d+/g);
+				var format = /[!@#$%^&*()+=\[\]{};':"\\|,<>\/?]+/;
+				if (matches != null || format.test(associated_malware)) {
+  				  alert("No numbers or special characters allowed in the name.\nPlease try again using alphabetical letters!");
+				}
+				else {
+					return true;
+				}
+			},
+                "errors": {
+                "type":"associated malware must be a string"
+                }
+           },
+           "ttps": {
+                "type": "string",
+                "placeholder":"optional",
+                "mandatory":false,
+                "validator": function(ttps) {
+				var matches = ttps.match(/\d+/g);
+				var format = /[!@#$%^&*()+=\[\]{};':"\\|,<>\/?]+/;
+				if (matches != null || format.test(ttps)) {
+  				  alert("No numbers or special characters allowed in the name.\nPlease try again using alphabetical letters!");
+				}
+				else {
+					return true;
+				}
+			},
+                "errors": {
+                "type":"ttps must be a string"
+                }
+           },
+           "modus_operandi": {
+                "type": "string",
+                "placeholder":"optional",
+                "mandatory":false,
+               "validator": function(modus_operandi) {
+				var matches = modus_operandi.match(/\d+/g);
+				var format = /[!@#$%^&*()+=\[\]{};':"\\|,<>\/?]+/;
+				if (matches != null || format.test(modus_operandi)) {
+  				  alert("No numbers or special characters allowed in the name.\nPlease try again using alphabetical letters!");
+				}
+				else {
+					return true;
+				}
+			},
+			 "errors": {
+                "type":"Modus operandi must be a string"
+                }
+           },
+           "references": {
+              	"placeholder": "Mandatory",
+                "mandatory":true,
+                "validator": function(references) {
+				 var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+				 if(regexp.test(references)){
+				   return true;
+				}
+				else{
+				alert("Please enter a valid url");
+				}
+				},
+           },
+           "toolsets": {
+                "type": "string",
+                "placeholder":"optional",
+                "mandatory":false,
+                "validator": function(toolsets) {
+				var matches = toolsets.match(/\d+/g);
+				var format = /[!@#$%^&*()+=\[\]{};':"\\|,<>\/?]+/;
+				if (matches != null || format.test(toolsets)) {
+  				  alert("No numbers or special characters allowed in the name.\nPlease try again using alphabetical letters!");
+				}
+				else {
+					return true;
+				}
+			},
+                "errors": {
+                "type":"toolsets must be a string"
+                }
+           },
+           "comments": {
+             "type": "string",
+             "placeholder":"optional",
+             "mandatory":false,
+             "errors": {
+             "type":"comments must be a string"
+             }
+        },
+					}
+				});
+
+				$("#test-table").FullTable("on", "error", function(errors) {
+					for (var error in errors) {
+						error = errors[error];
+						console.log(error);
+					}
+				});
+				$("#test-table").FullTable("draw");
+
+
+
+			}
+		);
+	</script>
+</head>
+<body bgcolor="#6495ED">
+
+		<h1> APT Tracking Platform</h1>
+		<table class="fulltable fulltable-editable" id="test-table" >
+			<thead>
+				<tr>
+						<th fulltable-field-name="common_names">Common Name</th>
+						<th fulltable-field-name="alternate_names">Alternate Name</th>
+						<th fulltable-field-name="target_sector">Target Sector</th>
+						<th fulltable-field-name="attack_vector">Attack vector</th>
+						<th fulltable-field-name="associated_malware">Associated Malware</th>
+						<th fulltable-field-name="ttps">TTPs</th>
+						<th fulltable-field-name="modus_operandi">Modus Operandi</th>
+						<th fulltable-field-name="references">References</th>
+						<th fulltable-field-name="toolsets">Toolsets</th>
+						<th fulltable-field-name="comments">Comments</th>
+
+				</tr>
+			</thead>
+			<tbody>
+<tr><td>.bash_profile</td><td>.bashrc</td><td>IT sector</td><td>Binary padding</td><td>Trojan</td><td>Network tapping</td><td>Command Line Interface</td><td>https://attack.mitre.org/techniques/T1059</td><td>Avira</td><td></td></tr>
+<tr><td>Dylib hijacking</td><td>Launch Daemon</td><td>Finance</td><td>Decode files</td><td>Nimda</td><td>Bash History</td><td>Mshta</td><td>https://attack.mitre.org/techniques/T1157</td><td>Avast</td><td></td></tr>
+<tr><td>Spearphishing</td><td>Dynamic Data Exchange</td><td>Authentication Package</td><td>AppInit DLLs</td><td>BITS Jobs</td><td>Cloud Service Dashboard</td><td>Defacement</td><td>https://attack.mitre.org/techniques/T1491</td><td>Norton</td><td>Nice description</td></tr>
+<tr><td>Valid Accounts</td><td>InstallUtil</td><td>Health</td><td>Remote File Copy</td><td>Multi-hop Proxy</td><td>Bash History</td><td>Data Obfuscation</td><td>https://attack.mitre.org/techniques/T1187</td><td>Avast</td><td>Be watchful of the threat</td></tr>
+<tr><td>Data Staged</td><td>SSH Hijacking</td><td>Sports</td><td>Domain Fronting</td><td>Bootkit</td><td>Input Prompt</td><td>Query Registry</td><td>https://attack.mitre.org/techniques/T1176</td><td>Symantec</td><td></td></tr>
+<tr><td>Query Registry</td><td>Service Stop</td><td>Shopping</td><td>Port Knocking</td><td>Hooking</td><td>Kerberoasting</td><td>Logon Scripts</td><td>https://attack.mitre.org/techniques/T1519</td><td>Firewall</td><td>More research needed </td></tr>
+<tr><td>Network Sniffing</td><td>Fallback Channels</td><td>Entertainment</td><td>Code Signing</td><td>Input Capture</td><td>Forced Authentication</td><td>Pass the Hash</td><td>https://attack.mitre.org/techniques/T1056/</td><td>Kaspersky</td><td></td></tr>
+
+			</tbody>
+	</table>
+
+
+</body>
+</html>
